@@ -7,9 +7,9 @@ import { useState } from 'react';
 import React from 'react';
 
 const App = () => {
-  const [good, setGood] = useState('0');
-  const [neutral, setNeutral] = useState('0');
-  const [bad, setBad] = useState('0');
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
   //-----------------------------------------------------------------------
 
   const total = good + neutral + bad;
@@ -19,13 +19,13 @@ const App = () => {
   function onClickBtn(option) {
     switch (option) {
       case 'good':
-        setGood(good + 1);
+        setGood(prev => prev + 1);
         break;
       case 'neutral':
-        setNeutral(neutral + 1);
+        setNeutral(neutral => neutral + 1);
         break;
       case 'bad':
-        setBad(bad + 1);
+        setBad(bad => bad + 1);
         break;
 
       default:
@@ -41,8 +41,8 @@ const App = () => {
     <div>
       <Section title="Please leave feedback">
         <Feedbackoption
-          option={{ good, neutral, bad }}
-          onLeaveFeedback={onClickBtn}
+          options={Object.keys({ good, neutral, bad })}
+          onClickBtn={onClickBtn}
           // options={Object.keys(this.state)}
           // updateState={this.updateState}
         />
